@@ -66,6 +66,7 @@ return (
         <AudioPlayer
           lesson={currentLesson}
           // onComplete={() => setActiveLesson(null)}
+          // onComplete={() => currentLesson.completed=true}
         />
       )}
 
@@ -117,7 +118,10 @@ return (
                 ) : lesson.type === "live" ? (
                   <Radio className="h-4 w-4 text-destructive" />
                 ) : (
+                  <>
                   <span>{idx + 1}</span>
+                  {/* <input type="checkbox" name="" id="" onClick={() => lesson.completed =true}/> */}
+                  </>
                 )}
               </span>
 
