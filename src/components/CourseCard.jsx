@@ -1,35 +1,36 @@
 import { Link } from 'react-router-dom';
+// import { Course } from "@/data/courses";
+import { Progress } from "@/components/ui/progress";
+
+// interface CourseCardProps {
+//   course: Course;
+//   onClick: (courseId: string) => void;
+// }
+
+// const CourseCard = ({ course, onClick }: CourseCardProps) => {
 const CourseCard = ({ course }) => {
+  const progress = Math.round((course.completedLessons / course.totalLessons) * 100);
+
   return (
-    <Link
-      to={`/courses/${course.id}`}
-      className="group block rounded-lg border border-border bg-card p-4 transition-all hover:border-accent/40 hover:glow-gold"
-      aria-label={`${course.title} - ${course.lessonsCount} lessons`}
+    <button
+      className="group flex w-full items-start gap-4 rounded-lg border border-border bg-card p-4 text-left transition-all hover:border-primary/40 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ring"
+      aria-label={`${course.title} — ${progress}% complete`}
     >
-      <div className="mb-3 flex items-start justify-between">
-        <span className="text-3xl" role="img" aria-hidden="true">{course.icon}</span>
-        <span className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-muted-foreground">
-          {course.category}
-        </span>
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-muted text-2xl">
+        {course.icon}
       </div>
-      <h3 className="mb-1 font-heading text-sm font-semibold leading-tight text-foreground group-hover:text-accent transition-colors">
-        {course.title}
-      </h3>
-      <p className="mb-3 text-xs text-muted-foreground line-clamp-2">{course.description}</p>
-      <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
-        {/* <span className="flex items-center gap-1"><BookOpen className="h-3 w-3" /> {course.lessonsCount} lessons</span>
-        <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {course.duration}</span> */}
-      </div>
-      {course.progress !== undefined && (
-        <div className="space-y-1">
-          <div className="flex justify-between text-[10px] text-muted-foreground">
-            <span>Progress</span>
-            <span>{course.progress}%</span>
-          </div>
-          {/* <Progress value={course.progress} className="h-1.5" /> */}
+      <div className="min-w-0 flex-1">
+        <div className="flex items-baseline justify-between gap-2">
+          <h3 className="truncate font-semibold text-card-foreground">{course.title}</h3>
+          <span className="shrink-0 font-arabic text-sm text-muted-foreground">{course.titleAr}</span>
         </div>
-      )}
-    </Link>
+        <p className="mt-0.5 text-xs text-muted-foreground">{course.instructor} · {course.totalLessons} lessons</p>
+        <div className="mt-2 flex items-center gap-2">
+          <Progress value={progress} className="h-1.5 flex-1" aria-label={`${progress}% complete`} />
+          <span className="text-xs font-medium text-primary">{progress}%</span>
+        </div>
+      </div>
+    </button>
   );
 };
 

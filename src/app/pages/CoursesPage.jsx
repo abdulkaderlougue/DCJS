@@ -3,17 +3,18 @@ import { courses } from "../../data/courses";
 import CourseCard  from "../../components/CourseCard";
 
 export default function CoursesPage() {
-  return (
-    <div>
-      <h1>Courses</h1>
 
-      {courses.map((course) => (
-        <div key={course.id}>
-          <h3>{course.title}</h3>
-          {/* <Link to={`/course/${course.id}`} className="group block rounded-lg border border-border bg-card p-4 transition-all hover:border-accent/40 hover:glow-gold">View Course</Link> */}
-          <CourseCard course={course}/>
-        </div>
-      ))}
+  return (
+    <div className="animate-fade-in space-y-4 pb-4">
+      <h1 className="text-2xl font-bold text-foreground">Courses</h1>
+
+      <div className="space-y-3">
+        {courses.map((course) => (
+          <Link key={course.id} to={`/courses/${course.id}`}>
+            <CourseCard key={course.id} course={course} />
+          </Link>
+        ))}
+      </div>
 
     </div>
   );
