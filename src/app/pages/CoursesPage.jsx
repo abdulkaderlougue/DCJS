@@ -6,7 +6,7 @@ export default function CoursesPage() {
 
   return (
     <div className="animate-fade-in space-y-4 pb-4">
-      <h1 className="text-2xl font-bold text-foreground">Tous les cours</h1>
+      <h1 className="text-2xl font-bold text-foreground">Tous les cours </h1>
 
       <div className="space-y-3">
         {courses.map((course) => (
@@ -15,7 +15,6 @@ export default function CoursesPage() {
           </Link>
         ))}
       </div>
-
     </div>
   );
 }

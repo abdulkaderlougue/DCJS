@@ -46,8 +46,8 @@ return (
         <div className="min-w-0 flex-1">
           <h1 className="truncate text-xl font-bold text-foreground">{course.title}</h1>
           <p className="text-xs text-muted-foreground">Animateur: {course.instructor}</p>
-          <p className="text-xs text-muted-foreground">Livre: {course.book}</p>
-          <p className="text-xs text-muted-foreground">Auteur: {course.author}</p>
+          {course.book && (<p className="text-xs text-muted-foreground">Livre: {course.book}</p>)}
+          {course.author && (<p className="text-xs text-muted-foreground">Auteur: {course.author}</p>)}
         </div>
         <span className="text-2xl">{course.icon}</span>
       </div>

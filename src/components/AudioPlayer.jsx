@@ -8,6 +8,9 @@ function AudioPlayer( { lesson }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime ] = useState(0);
+    const [audioSpeed, setAudioSpeed] = useState(1);
+    const speeds = [1, 1.25, 1.5, 1.75, 2];
+
     // console.log(lesson.audioUrl)
     // toggle to play and pause
     const togglePlay = () =>{
@@ -44,6 +47,7 @@ function AudioPlayer( { lesson }) {
     const handleLoadedMetadata = () =>{
         // set the duration in seconds, provide as input to input slider
         setDuration(audioRef.current.duration); 
+        audioRef.current.playbackRate = audioSpeed; // set the audio speed with the user current speed
     }
 
     const handleSeek = (e) => {
@@ -74,6 +78,13 @@ function AudioPlayer( { lesson }) {
         setIsPlaying(false);
     }
 
+    const changeAudioSpeed = (e) => {
+        // change the speedof the audio
+        if (audioRef.current){
+            audioRef.current.playbackRate = e.target.value;
+        }
+        setAudioSpeed(e.target.value);
+    }
 
     return ( 
         <div className="rounded-lg border border-border bg-card p-4">
@@ -101,12 +112,11 @@ function AudioPlayer( { lesson }) {
             <div className="mb-3 flex justify-between text-xs text-muted-foreground">
                 <span>{formatTime(currentTime)}</span>
                 <span>{duration ? formatTime(duration) : lesson.duration}</span> 
-         
             </div>
 
             <div className="flex items-center justify-center gap-4">
                 <Button variant="ghost" size="icon" onClick={() => skip(-15)} aria-label="Rewind 15 seconds">
-                <SkipBack className="h-4 w-4" />
+                    <SkipBack className="h-4 w-4" />
                 </Button>
                 <Button
                 onClick={togglePlay}
@@ -114,12 +124,19 @@ function AudioPlayer( { lesson }) {
                 className="h-12 w-12 rounded-full"
                 aria-label={isPlaying ? "Pause" : "Play"}
                 >
-                {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5 ml-0.5" />}
+                    {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5 ml-0.5" />}
                 </Button>
                 <Button variant="ghost" size="icon" onClick={() => skip(15)} aria-label="Forward 15 seconds">
-                <SkipForward className="h-4 w-4" />
+                    <SkipForward className="h-4 w-4" />
                 </Button>
-                <Volume2 className="ml-2 h-4 w-4 text-muted-foreground" />
+                {/* <Volume2 className="ml-2 h-4 w-4 text-muted-foreground" /> */}
+
+                <select name="speed" id="speed" className="h-4 text-xs text-muted-foreground" onChange={changeAudioSpeed}>
+                    {speeds.map(rate => {
+                        return (<option key={rate} value={rate}>{rate}x</option>)
+                    })}
+                </select>
+                
             </div>
         </div>
      );
