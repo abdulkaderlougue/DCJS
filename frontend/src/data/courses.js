@@ -133,6 +133,8 @@ export const courses = [
       {id: "aq3", title: "Cours N03", duration: "22:50", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-03.mp3`, completed: false, type: "audio" },
       {id: "aq4", title: "Cours N04", duration: "29:47", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-04.mp3`, completed: false, type: "audio" },
       {id: "aq5", title: "Cours N05", duration: "24:01", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-05.mp3`, completed: false, type: "audio" },
+      {id: "aq6", title: "Cours N06 (Partie 1)", duration: "20:18", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-06-a.mp3`, completed: false, type: "audio" },
+      {id: "aq6.2", title: "Cours N06 (Partie 2)", duration: "20:59", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-06-b.mp3`, completed: false, type: "audio" },
     ],
     quizzes: [
       { id: "aqq1", question: "Que signifie linguistiquement 'aquidah'?", options: ["Lire et écrire", "Lier et attacher fermement", "Comprendre et analyser", "Enseigner et transmettre"], correctIndex: 1 },

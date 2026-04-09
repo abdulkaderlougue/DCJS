@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { courses } from "../../data/courses";
 import AudioPlayer from "../../components/AudioPlayer";
+import QuizCard from "../../components/QuizCard";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CheckCircle, Circle, Radio, Headphones } from "lucide-react";
@@ -23,7 +24,7 @@ export default function CourseDetailPage() {
   const handleLessonClick = (lesson) => {
     // set active lesson
     if (lesson.type === "audio") setActiveLesson(lesson.id);
-    console.log(lesson.audioUrl)
+    // console.log(lesson.audioUrl)
 
     // scroll up
     window.scrollTo({
