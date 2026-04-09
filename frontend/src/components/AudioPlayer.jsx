@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Button } from '@/components/ui/button';
-import { Play, Pause, SkipBack, SkipForward, Volume2 } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Volume2, Download } from "lucide-react";
 
 function AudioPlayer( { lesson }) {
     // need ref to have access to the actual DOM to use audio properties as React does not provide
@@ -136,6 +136,13 @@ function AudioPlayer( { lesson }) {
                         return (<option key={rate} value={rate}>{rate}x</option>)
                     })}
                 </select>
+
+                {/* Download the audio */}
+                <a href={lesson.audioUrl} download>
+                    <Download className="h-4 w-4 text-muted-foreground"/>
+                </a>
+                
+                
                 
             </div>
         </div>
