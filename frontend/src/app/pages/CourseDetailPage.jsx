@@ -23,6 +23,7 @@ export default function CourseDetailPage() {
   const handleLessonClick = (lesson) => {
     // set active lesson
     if (lesson.type === "audio") setActiveLesson(lesson.id);
+    console.log(lesson.audioUrl)
 
     // scroll up
     window.scrollTo({
@@ -137,7 +138,7 @@ return (
                     <><Headphones className="h-3 w-3" /> {lesson.duration}</>
                   )}
                 </p>
-                <p className="text-xs text-muted-foreground flex items-center gap-1">Chapitre: {lesson.chapter }</p>
+                {lesson.chapter && <p className="text-xs text-muted-foreground flex items-center gap-1">Chapitre: {lesson.chapter }</p>}
               </div>
             </button>
           ))}

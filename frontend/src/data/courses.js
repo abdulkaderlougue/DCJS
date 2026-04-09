@@ -40,6 +40,7 @@
 
 const PUBLIC_BASE_URL="https://nmdetbbectwrrsgargmo.supabase.co/storage/v1/object/public";
 const FIQH_DIR = "delice-des-coeurs/fiqh/livres/Adourraroul_Bihiya";
+const AQEEDAH_DIR = "delice-des-coeurs/aquidah/livres/rissala_ibn_abi_zaid";
 // export const courses: Course[] = [
 // console.log(`${PUBLIC_BASE_URL}/${FIQH_DIR}/cours-01.mp3`)
 export const courses = [
@@ -113,6 +114,39 @@ export const courses = [
     ],
     quizzes: [],
   },
+    {
+    id: "aqeedah",
+    title: "Aqeedah",
+    titleAr: "العقيدة",
+    description: "Islamic creed and theology — the six pillars of faith and related topics.",
+    instructor: "Imam A. Bakayoko",
+    book: "Ar-Rissala d'Ibn Abi Zayd",
+    author: "Iman Ibn Abi Zayd",
+    category: "Aqeedah",
+    icon: "🌙",
+    totalLessons: 5,
+    completedLessons: 1,
+    color: "secondary",
+    lessons: [
+      {id: "aq1", title: "Introduction à la science de l’Aquidah : Les 10 points clés pour débuter l’étude d'une science", duration: "34:38", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-01.mp3`, completed: false, type: "audio" },
+      {id: "aq2", title: "Cours N02", duration: "32:52", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-02.mp3`, completed: false, type: "audio" },
+      {id: "aq3", title: "Cours N03", duration: "22:50", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-03.mp3`, completed: false, type: "audio" },
+      {id: "aq4", title: "Cours N04", duration: "29:47", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-04.mp3`, completed: false, type: "audio" },
+      {id: "aq5", title: "Cours N05", duration: "24:01", audioUrl: `${PUBLIC_BASE_URL}/${AQEEDAH_DIR}/cours-05.mp3`, completed: false, type: "audio" },
+    ],
+    quizzes: [
+      { id: "aqq1", question: "Que signifie linguistiquement 'aquidah'?", options: ["Lire et écrire", "Lier et attacher fermement", "Comprendre et analyser", "Enseigner et transmettre"], correctIndex: 1 },
+      { id: "aqq2", question: "Quelle est la caractéristique principale d’une aquidah ?", options: ["Une opinion changeante", "Une croyance avec doute", "Une croyance ferme sans doute", "Une simple hypothèse"], correctIndex: 2 },
+      { id: "aqq3", question: "Combien de points essentiels faut-il maîtriser avant d’étudier une science ?", options: ["5", "7", "10", "12"], correctIndex: 2 },
+      { id: "aqq4", question: "Quel est le premier point essentiel abordé ?", options: ["L’objectif", "La définition", "L’histoire", "Les auteurs"], correctIndex: 1 },
+      { id: "aqq5", question: "Quels sont les trois grands axes de l’aquidah ?", options: ["Prière, jeûne, zakat", "Divinité, prophétie, invisible", "Morale, politique, économie", "Langue, logique, histoire"], correctIndex: 1 },
+      { id: "aqq6", question: "Lequel des éléments suivants ne fait PAS partie de l’aquidah ?", options: ["La croyance aux anges", "La croyance au destin", "Les règles de la prière", "La croyance au Jour dernier"], correctIndex: 2 },
+      { id: "aqq7", question: "Quel est l’un des bénéfices de l’étude de l’aquidah ?", options: ["Apprendre une langue", "Purifier la croyance", "Gagner de l’argent", "Voyager"], correctIndex: 1 },
+      { id: "aqq8", question: "Pourquoi l’aquidah est-elle considérée comme une science noble ?", options: ["Parce qu’elle est facile", "Parce qu’elle est récente", "Parce qu’elle traite d’Allah", "Parce qu’elle est uniquement pour les savants"], correctIndex: 2 },
+      { id: "aqq9", question: "Comment appelle-t-on aussi la science de l’aquidah ?", options: ["Science du commerce", "Science du tawhid", "Science de la médecine", "Science de la poésie"], correctIndex: 1 },
+      { id: "aqq10", question: "Quelle est la source principale de l’aquidah ?", options: ["Les traditions culturelles", "Les opinions personnelles", "Les textes religieux (Coran et Sunna)", "Les sciences modernes"], correctIndex: 2 }
+    ],
+  },
   {
     id: "quran",
     title: "Tafsir",
@@ -141,8 +175,8 @@ export const courses = [
       // { id: "q12", title: "Final Review", duration: "45:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3", completed: false, type: "audio" },
     ],
     quizzes: [
-      { id: "qq1", question: "What is Tajweed?", options: ["Speed reading", "Science of proper Quran recitation", "Arabic grammar", "Hadith study"], correctIndex: 1 },
-      { id: "qq2", question: "How many Makharij (articulation points) are there?", options: ["10", "14", "17", "20"], correctIndex: 2 },
+      // { id: "qq1", question: "What is Tajweed?", options: ["Speed reading", "Science of proper Quran recitation", "Arabic grammar", "Hadith study"], correctIndex: 1 },
+      // { id: "qq2", question: "How many Makharij (articulation points) are there?", options: ["10", "14", "17", "20"], correctIndex: 2 },
     ],
   },
   {
@@ -171,34 +205,7 @@ export const courses = [
       { id: "h10", title: "Live Sur Google Meet", duration: "1:00:00", audioUrl: "", completed: false, type: "live" },
     ],
     quizzes: [
-      { id: "hq1", question: "What is an Isnad?", options: ["The text of a hadith", "The chain of narrators", "A type of hadith book", "A hadith ruling"], correctIndex: 1 },
-    ],
-  },
-  {
-    id: "aqeedah",
-    title: "Aqeedah",
-    titleAr: "العقيدة",
-    description: "Islamic creed and theology — the six pillars of faith and related topics.",
-    instructor: "Imam A. Bakayoko",
-    book: "Ar-Rissala d'Ibn Abi Zayd",
-    author: "",
-    category: "Aqeedah",
-    icon: "🌙",
-    totalLessons: 8,
-    completedLessons: 0,
-    color: "secondary",
-    lessons: [
-      // { id: "ak1", title: "What is Aqeedah?", duration: "30:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", completed: true, type: "audio" },
-      // { id: "ak2", title: "Belief in Allah", duration: "50:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", completed: true, type: "audio" },
-      // { id: "ak3", title: "Belief in the Angels", duration: "35:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", completed: true, type: "audio" },
-      // { id: "ak4", title: "Belief in the Books", duration: "38:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", completed: true, type: "audio" },
-      // { id: "ak5", title: "Belief in the Prophets", duration: "42:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", completed: false, type: "audio" },
-      // { id: "ak6", title: "Belief in the Day of Judgment", duration: "45:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3", completed: false, type: "audio" },
-      // { id: "ak7", title: "Belief in Qadr (Divine Decree)", duration: "40:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3", completed: false, type: "audio" },
-      // { id: "ak8", title: "Shirk and its Categories", duration: "48:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3", completed: false, type: "audio" },
-    ],
-    quizzes: [
-      { id: "akq1", question: "How many pillars of Iman are there?", options: ["4", "5", "6", "7"], correctIndex: 2 },
+      // { id: "hq1", question: "What is an Isnad?", options: ["The text of a hadith", "The chain of narrators", "A type of hadith book", "A hadith ruling"], correctIndex: 1 },
     ],
   },
 
@@ -214,24 +221,24 @@ export const courses = [
     completedLessons: 2,
     color: "primary",
     lessons: [
-      // { id: "a1", title: "Arabic Alphabet & Pronunciation", duration: "30:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", completed: true, type: "audio" },
-      // { id: "a2", title: "Basic Vocabulary", duration: "35:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", completed: true, type: "audio" },
-      // { id: "a3", title: "Sentence Structure (Jumlah Ismiyyah)", duration: "40:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", completed: false, type: "audio" },
-      // { id: "a4", title: "Sentence Structure (Jumlah Fi'liyyah)", duration: "42:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", completed: false, type: "audio" },
-      // { id: "a5", title: "Pronouns & Demonstratives", duration: "28:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", completed: false, type: "audio" },
-      // { id: "a6", title: "Verb Conjugation (Past Tense)", duration: "45:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3", completed: false, type: "audio" },
-      // { id: "a7", title: "Verb Conjugation (Present Tense)", duration: "45:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3", completed: false, type: "audio" },
-      // { id: "a8", title: "Prepositions", duration: "25:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3", completed: false, type: "audio" },
-      // { id: "a9", title: "Adjectives & Descriptions", duration: "32:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3", completed: false, type: "audio" },
-      // { id: "a10", title: "Numbers & Counting", duration: "30:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3", completed: false, type: "audio" },
-      // { id: "a11", title: "Conversation Practice 1", duration: "35:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3", completed: false, type: "audio" },
-      // { id: "a12", title: "Reading Practice", duration: "38:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3", completed: false, type: "audio" },
-      // { id: "a13", title: "Nahw (Grammar) Fundamentals", duration: "50:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3", completed: false, type: "audio" },
-      // { id: "a14", title: "Sarf (Morphology) Basics", duration: "48:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3", completed: false, type: "audio" },
+      // { id: "ar1", title: "Arabic Alphabet & Pronunciation", duration: "30:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", completed: true, type: "audio" },
+      // { id: "ar2", title: "Basic Vocabulary", duration: "35:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", completed: true, type: "audio" },
+      // { id: "ar3", title: "Sentence Structure (Jumlah Ismiyyah)", duration: "40:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", completed: false, type: "audio" },
+      // { id: "ar4", title: "Sentence Structure (Jumlah Fi'liyyah)", duration: "42:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", completed: false, type: "audio" },
+      // { id: "ar5", title: "Pronouns & Demonstratives", duration: "28:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", completed: false, type: "audio" },
+      // { id: "ar6", title: "Verb Conjugation (Past Tense)", duration: "45:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3", completed: false, type: "audio" },
+      // { id: "ar7", title: "Verb Conjugation (Present Tense)", duration: "45:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3", completed: false, type: "audio" },
+      // { id: "ar8", title: "Prepositions", duration: "25:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3", completed: false, type: "audio" },
+      // { id: "ar9", title: "Adjectives & Descriptions", duration: "32:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3", completed: false, type: "audio" },
+      // { id: "ar10", title: "Numbers & Counting", duration: "30:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3", completed: false, type: "audio" },
+      // { id: "ar11", title: "Conversation Practice 1", duration: "35:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3", completed: false, type: "audio" },
+      // { id: "ar12", title: "Reading Practice", duration: "38:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3", completed: false, type: "audio" },
+      // { id: "ar13", title: "Nahw (Grammar) Fundamentals", duration: "50:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3", completed: false, type: "audio" },
+      // { id: "ar14", title: "Sarf (Morphology) Basics", duration: "48:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3", completed: false, type: "audio" },
       { id: "a15", title: "Live", duration: "1:00:00", audioUrl: "", completed: false, type: "live" },
     ],
     quizzes: [
-      { id: "aq1", question: "How many letters are in the Arabic alphabet?", options: ["24", "26", "28", "30"], correctIndex: 2 },
+      // { id: "arq1", question: "How many letters are in the Arabic alphabet?", options: ["24", "26", "28", "30"], correctIndex: 2 },
     ],
   },
   

@@ -131,7 +131,7 @@ function AudioPlayer( { lesson }) {
                 </Button>
                 {/* <Volume2 className="ml-2 h-4 w-4 text-muted-foreground" /> */}
 
-                <select name="speed" id="speed" className="h-4 text-xs text-muted-foreground" onChange={changeAudioSpeed}>
+                <select name="speed" id="speed" className="h-4 text-sm text-muted-foreground" onChange={changeAudioSpeed}>
                     {speeds.map(rate => {
                         return (<option key={rate} value={rate}>{rate}x</option>)
                     })}
