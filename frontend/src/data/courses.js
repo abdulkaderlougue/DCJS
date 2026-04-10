@@ -37,10 +37,13 @@
 //   answer?: string;
 //   date: string;
 // }
-
+const SAMAKE = "imam_samake";
+const BAKAYOKO = "imam_bakayoko";
+const CLOUDFARE_PUBLIC_BASE_URL="https://pub-0a4b4bf38492431b91bd29776ddb5504.r2.dev";
 const PUBLIC_BASE_URL="https://nmdetbbectwrrsgargmo.supabase.co/storage/v1/object/public";
 const FIQH_DIR = "delice-des-coeurs/fiqh/livres/Adourraroul_Bihiya";
 const AQEEDAH_DIR = "delice-des-coeurs/aquidah/livres/rissala_ibn_abi_zaid";
+const TAFSEER_DIR = "delice-des-coeurs/tafsirs";
 // export const courses: Course[] = [
 // console.log(`${PUBLIC_BASE_URL}/${FIQH_DIR}/cours-01.mp3`)
 export const courses = [
@@ -154,27 +157,34 @@ export const courses = [
     title: "Tafsir",
     titleAr: "تفسير القرآن",
     description: "Learn Quran recitation, tajweed rules, and tafseer of selected surahs.",
-    instructor: "Imam Allassane Bakayoko",
+    instructor: "Imam Idriss Samake ",
     book: "",
     author: "",
     category: "Quran",
     icon: "📖",
-    totalLessons: 12,
-    completedLessons: 5,
+    totalLessons: 18,
+    completedLessons: 0,
     color: "primary",
     lessons: [
-      // { id: "q1", title: "Introduction to Tajweed", duration: "32:15", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", completed: true, type: "audio" },
-      // { id: "q2", title: "Makharij al-Huroof", duration: "45:30", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", completed: true, type: "audio" },
-      // { id: "q3", title: "Rules of Noon Sakinah", duration: "38:20", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", completed: true, type: "audio" },
-      // { id: "q4", title: "Rules of Meem Sakinah", duration: "28:10", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", completed: true, type: "audio" },
-      // { id: "q5", title: "Al-Madd (Prolongation)", duration: "41:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", completed: true, type: "audio" },
-      // { id: "q6", title: "Tafseer: Surah Al-Fatiha", duration: "55:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3", completed: false, type: "audio" },
-      // { id: "q7", title: "Tafseer: Surah Al-Baqarah (1-5)", duration: "1:02:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3", completed: false, type: "audio" },
-      // { id: "q8", title: "Tafseer: Surah Al-Baqarah (6-20)", duration: "58:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3", completed: false, type: "audio" },
-      // { id: "q9", title: "Waqf and Ibtidaa", duration: "35:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3", completed: false, type: "audio" },
-      // { id: "q10", title: "Revision & Practice Session", duration: "40:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3", completed: false, type: "audio" },
-      { id: "q11", title: "Live Q&A Session", duration: "1:00:00", audioUrl: "", completed: false, type: "live" },
-      // { id: "q12", title: "Final Review", duration: "45:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3", completed: false, type: "audio" },
+      { id: "q1", title: "Surah Al-Fatiha (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-01-fatiha-1.mp3`, completed: false, type: "audio" },
+      { id: "q2", title: "Surah Al-Fatiha (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-01-fatiha-2.mp3`, completed: false, type: "audio" },
+      { id: "q3", title: "Surah Al-Fatiha (Partie 3)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-01-fatiha-3.mp3`, completed: false, type: "audio" },
+      { id: "q4", title: "Surah Al-Fatiha (Partie 4)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-01-fatiha-4.mp3`, completed: false, type: "audio" },
+      { id: "q5", title: "Surah Al-Fatiha (Partie 5)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-01-fatiha-5.mp3`, completed: false, type: "audio" },
+      { id: "q6", title: "Surah Al-Fatiha (Partie 6)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-01-fatiha-6.mp3`, completed: false, type: "audio" },
+      { id: "q7", title: "Surah Al-Fatiha (Partie 7)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-01-fatiha-7.mp3`, completed: false, type: "audio" },
+      { id: "q8", title: "Surah Al-Fatiha (Partie 8)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-01-fatiha-8.mp3`, completed: false, type: "audio" },
+      { id: "q9", title: "Surah An-Nass (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-02-nass-1.mp3`, completed: false, type: "audio" },
+      { id: "q10", title: "Surah An-Nass (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-02-nass-2.mp3`, completed: false, type: "audio" },
+      { id: "q11", title: "Surah Al-Falaq (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-03-falaq-1.mp3`, completed: false, type: "audio" },
+      { id: "q12", title: "Surah Al-Falaq (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-03-falaq-2.mp3`, completed: false, type: "audio" },
+      { id: "q13", title: "Surah Al-Ikhlas (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-04-ikhlas-1.mp3`, completed: false, type: "audio" },
+      { id: "q14", title: "Surah Al-Ikhlas (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-04-ikhlas-2.mp3`, completed: false, type: "audio" },
+      { id: "q15", title: "Surah Al-Masad (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-05-massad-1.mp3`, completed: false, type: "audio" },
+      { id: "q16", title: "Surah Al-Masad (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-05-massad-2.mp3`, completed: false, type: "audio" },
+      { id: "q17", title: "Surah An-Nasr (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-06-nasr-1.mp3`, completed: false, type: "audio" },
+      { id: "q18", title: "Surah An-Nasr (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-06-nasr-2.mp3`, completed: false, type: "audio" },
+      { id: "q0", title: "Live Q&A Session", duration: "1:00:00", audioUrl: "", completed: false, type: "live" },
     ],
     quizzes: [
       // { id: "qq1", question: "What is Tajweed?", options: ["Speed reading", "Science of proper Quran recitation", "Arabic grammar", "Hadith study"], correctIndex: 1 },
@@ -191,8 +201,8 @@ export const courses = [
     author: "",
     category: "Hadith",
     icon: "📜",
-    totalLessons: 10,
-    completedLessons: 3,
+    totalLessons: 1,
+    completedLessons: 1,
     color: "secondary",
     lessons: [
       // { id: "h1", title: "What is Hadith?", duration: "30:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", completed: true, type: "audio" },
@@ -219,8 +229,8 @@ export const courses = [
     instructor: "Imam A. Bakayoko",
     category: "Arabic",
     icon: "✍️",
-    totalLessons: 15,
-    completedLessons: 2,
+    totalLessons: 1,
+    completedLessons: 1,
     color: "primary",
     lessons: [
       // { id: "ar1", title: "Arabic Alphabet & Pronunciation", duration: "30:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", completed: true, type: "audio" },
