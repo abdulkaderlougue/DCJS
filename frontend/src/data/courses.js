@@ -229,6 +229,7 @@ export const courses = [
       { id: "q48", title: "Surah An-Naba (Partie 3)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naba_3.m4a`, completed: false, type: "audio" },
       { id: "q49", title: "Surah An-Naba (Partie 4)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naba_4.m4a`, completed: false, type: "audio" },
       { id: "q50", title:"Surah An-Naba (Partie 5)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naba_5.m4a`, completed: false, type: "audio" },
+      { id: "q51", title:"Enseignements tirés du Juzz Amma", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Enseignements_tires_du_Juzz_Amma.m4a`, completed: false, type: "audio" },
       { id: "q0", title: "Live Q&A Session", duration: "1:00:00", audioUrl: "", completed: false, type: "live" },
     ],
     quizzes: [
