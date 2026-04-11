@@ -41,6 +41,7 @@ const SAMAKE = "imam_samake";
 const BAKAYOKO = "imam_bakayoko";
 const CLOUDFARE_PUBLIC_BASE_URL="https://pub-0a4b4bf38492431b91bd29776ddb5504.r2.dev";
 const PUBLIC_BASE_URL="https://nmdetbbectwrrsgargmo.supabase.co/storage/v1/object/public";
+const PUBLIC_BASE_URL2="https://bgkaionsqxegfbfxtoct.supabase.co/storage/v1/object/public";
 const FIQH_DIR = "delice-des-coeurs/fiqh/livres/Adourraroul_Bihiya";
 const AQEEDAH_DIR = "delice-des-coeurs/aquidah/livres/rissala_ibn_abi_zaid";
 const TAFSEER_DIR = "delice-des-coeurs/tafsirs";
@@ -162,7 +163,7 @@ export const courses = [
     author: "",
     category: "Quran",
     icon: "📖",
-    totalLessons: 18,
+    totalLessons: 50,
     completedLessons: 0,
     color: "primary",
     lessons: [
@@ -184,6 +185,50 @@ export const courses = [
       { id: "q16", title: "Surah Al-Masad (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-05-massad-2.mp3`, completed: false, type: "audio" },
       { id: "q17", title: "Surah An-Nasr (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-06-nasr-1.mp3`, completed: false, type: "audio" },
       { id: "q18", title: "Surah An-Nasr (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${SAMAKE}/cours-06-nasr-2.mp3`, completed: false, type: "audio" },
+
+      // DCJS superbase
+      { id: "q19", title: "Surah Al-Fajr (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-FAJR1.m4a`, completed: false, type: "audio" },
+  
+      { id: "q20", title: "Surah Al-Ghashiya (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-Ghashiya_1.m4a`, completed: false, type: "audio" },
+      { id: "q21", title: "Surah Al-Ghashiya (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-Ghashiya_2.m4a`, completed: false, type: "audio" },
+      { id: "q22", title: "Surah Al-Ghashiya (Partie 3)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-Ghashiya_3.m4a`, completed: false, type: "audio" },
+
+      { id: "q23", title: "Surah Al-A’la (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-Ala_1.m4a`, completed: false, type: "audio" },
+      { id: "q24", title: "Surah Al-A’la (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-Ala_2.m4a`, completed: false, type: "audio" },
+      
+      { id: "q25", title: "Surah At-Tariq", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/AT-TARIQ.m4a`, completed: false, type: "audio" },
+
+      { id: "q26", title: "Surah Al-Bouroudj", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/AL-bouroudj.m4a`, completed: false, type: "audio" },
+
+      { id: "q27", title: "Surah Al-Inshiqaq (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-Inshiqaq_1.m4a`, completed: false, type: "audio" },
+      { id: "q28", title: "Surah Al-Inshiqaq (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-Inshiqaq_2.m4a`, completed: false, type: "audio" },
+      
+      { id: "q29", title: "Surah Al-Infitar (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-infitar_1.m4a`, completed: false, type: "audio" },
+      { id: "q30", title: "Surah Al-Infitar (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-infitar_2.m4a`, completed: false, type: "audio" },
+      { id: "q31", title: "Surah Al-Infitar (Partie 3)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Al-infitar_3.m4a`, completed: false, type: "audio" },
+      
+      { id: "q32", title: "Surah At-Takwir (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/At-takwir_1.m4a`, completed: false, type: "audio" },
+      { id: "q33", title: "Surah At-Takwir (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/At-takwir_2.m4a`, completed: false, type: "audio" },
+      { id: "q34", title: "Surah At-Takwir (Partie 3)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/At-takwir_3.m4a`, completed: false, type: "audio" },
+      { id: "q35", title: "Surah At-Takwir (Partie 4)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/At-takwir_4.m4a`, completed: false, type: "audio" },
+      
+      { id: "q36", title: "Surah Abasa (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Abasa_1.m4a`, completed: false, type: "audio" },
+      { id: "q37", title: "Surah Abasa (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Abasa_2.m4a`, completed: false, type: "audio" },
+      { id: "q38", title: "Surah Abasa (Partie 3)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Abasa_3.m4a`, completed: false, type: "audio" },
+      { id: "q39", title: "Surah Abasa (Partie 4)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/Abasa_4.m4a`, completed: false, type: "audio" },
+      
+      { id: "q40", title: "Surah An-Nazi’at (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naziat_1.mp3`, completed: false, type: "audio" },
+      { id: "q41", title: "Surah An-Nazi’at (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naziat_2.m4a`, completed: false, type: "audio" },
+      { id: "q42", title: "Surah An-Nazi’at (Partie 3)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naziat_3.m4a`, completed: false, type: "audio" },
+      { id: "q43", title: "Surah An-Nazi’at (Partie 4)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naziat_4.m4a`, completed: false, type: "audio" },
+      { id: "q44", title: "Surah An-Nazi’at (Partie 5)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naziat_5.m4a`, completed: false, type: "audio" },
+      { id: "q45", title: "Surah An-Nazi’at (Partie 6)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naziat_6.m4a`, completed: false, type: "audio" },
+      
+      { id: "q46", title: "Surah An-Naba (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naba_1.m4a`, completed: false, type: "audio" },
+      { id: "q47", title: "Surah An-Naba (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naba_2.m4a`, completed: false, type: "audio" },
+      { id: "q48", title: "Surah An-Naba (Partie 3)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naba_3.m4a`, completed: false, type: "audio" },
+      { id: "q49", title: "Surah An-Naba (Partie 4)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naba_4.m4a`, completed: false, type: "audio" },
+      { id: "q50", title:"Surah An-Naba (Partie 5)", duration: "", audioUrl: `${PUBLIC_BASE_URL2}/${TAFSEER_DIR}/${SAMAKE}/An-Naba_5.m4a`, completed: false, type: "audio" },
       { id: "q0", title: "Live Q&A Session", duration: "1:00:00", audioUrl: "", completed: false, type: "live" },
     ],
     quizzes: [
@@ -191,7 +236,7 @@ export const courses = [
       // { id: "qq2", question: "How many Makharij (articulation points) are there?", options: ["10", "14", "17", "20"], correctIndex: 2 },
     ],
   },
-    {
+  {
     id: "quran2",
     title: "Tafsir",
     titleAr: "تفسير القرآن",
