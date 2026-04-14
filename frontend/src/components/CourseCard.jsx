@@ -24,7 +24,7 @@ const CourseCard = ({ course }) => {
           <h3 className="truncate font-semibold text-card-foreground">{course.title}</h3>
           <span className="shrink-0 font-arabic text-sm text-muted-foreground">{course.titleAr}</span>
         </div>
-        <p className="mt-0.5 text-xs text-muted-foreground">{course.instructor} · {course.totalLessons} lessons</p>
+        <p className="mt-0.5 text-xs text-muted-foreground">{course.instructor} · {course.totalLessons} leçon{course.totalLessons >1 ? "s":""}</p>
         <div className="mt-2 flex items-center gap-2">
           <Progress value={progress} className="h-1.5 flex-1" aria-label={`${progress}% complete`} />
           <span className="text-xs font-medium text-primary">{progress}%</span>

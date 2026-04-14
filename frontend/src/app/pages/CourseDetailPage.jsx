@@ -57,7 +57,7 @@ return (
       {/* Progress */}
       <div className="rounded-lg border border-border bg-card p-3">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-card-foreground">{course.completedLessons}/{course.totalLessons} lessons</span>
+          <span className="text-card-foreground">{course.completedLessons}/{course.totalLessons} leçon{course.totalLessons >1 ? "s":""}</span>
           <span className="font-bold text-primary">{progress}%</span>
         </div>
         <Progress value={progress} className="mt-2 h-1.5" />
@@ -80,7 +80,7 @@ return (
             tab === "lessons" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"
           }`}
         >
-          Lessons
+          Leçons
         </button>
 
         {/* Quiz section if there is any quiz */}
