@@ -1,5 +1,9 @@
 from pydantic import BaseModel, ConfigDict
 from typing import Optional
+from enum import Enum
+class LessonType(str, Enum):
+    audio = "audio"
+    live  = "live"
 
 class LessonBase(BaseModel):
     course_id: int
@@ -8,7 +12,7 @@ class LessonBase(BaseModel):
     description: str | None = None
     duration: int
     audio_url: str
-    lesson_type: str
+    lesson_type: LessonType
     # order_index: int
 
 class LessonCreate(LessonBase):

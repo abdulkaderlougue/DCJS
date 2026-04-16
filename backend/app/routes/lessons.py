@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from app.core.database import get_db
-from app.crud import lessons
-from app.schemas.lesson import LessonCreate, LessonResponse, LessonUpdate
-
+from app.crud import lessons, courses
+from app.schemas.lesson import LessonType, LessonCreate, LessonResponse, LessonUpdate
+from app.utils.supabase_utils import upload_file
 
 router = APIRouter()
 
@@ -32,11 +32,66 @@ def get_lesson_by_id(lesson_id: int, db = Depends(get_db)):
     return lesson
 
 @router.post("/", response_model=LessonResponse)
-def create_lesson(lesson_data: LessonCreate, db = Depends(get_db)):
-    """Endpoint pour créer une nouvelle leçon"""
+async def create_lesson(
+    file: UploadFile,
+    course_id: int = Form(...),
+    chapitre: str = Form(""), # not required
+    titre: str = Form(...),
+    description: str = Form(""),
+    duration: int = Form(description="La duree en seconde"),  # I should calculate in the backend
+    lesson_type: LessonType = Form(), # audio or live
+    db = Depends(get_db)
+    ):
+    """Endpoint pour créer une nouvelle leçon
+    duration: la duree de l'audio ou le live
+    """
+    # taille maximale du fichier en Mo
+    MAX_FILE_MB = 50
+    MAX_FILE_SIZE = MAX_FILE_MB * 1024 * 1024  # en octets
+
+
     try:
-        lesson = create_lesson(db, lesson_data)
+        # valider le type de fichier
+        if not file.content_type.startswith("audio/"):
+            raise HTTPException(
+                status_code=400,
+                detail="Type de fichier invalid. Selectionnez un fichier audio"
+            )
+
+        file_bytes = await file.read() # lire le fichier
+
+        # valider la taille du fichier
+        if len(file_bytes) > MAX_FILE_SIZE:
+            raise HTTPException(
+                status_code=413,
+                detail=f"Le fichier est trop volumineux. La taille maximale autorisée est de {MAX_FILE_MB} Mo."
+            )
+        
+        
+        file_name = "_".join(file.filename.split(" "))
+        course = courses.get_course_by_id(db, course_id)
+        course_name = "_".join(course.titre.split(" "))
+        instructor = "_".join(course.animateur.split(" "))
+        file_storage_path = f"{course_name}/{instructor}/{file_name}"
+        print(file_storage_path)
+        # Téléverser le fichier de la leçon et obtenir l'URL publique
+        res = upload_file(file_bytes, file_storage_path, file.content_type)
+        print(f"Lesson file uploaded successfully")
+        lesson_data = {
+            "course_id": course_id,
+            "chapitre": chapitre,
+            "titre": titre,
+            "description": description,
+            "duration": duration,
+            "lesson_type": lesson_type,
+            "audio_url": res['url']
+        }
+        # convert the dict object to pyddantic format to be parsed easily 
+        pydantic_lesson_data = LessonCreate(**lesson_data)
+        lesson = lessons.create_lesson(db, pydantic_lesson_data)
+        print(f"Lesson created successfully with id {lesson.id}")
     except Exception as e:
+        print(str(e))
         raise HTTPException(status_code=400, detail=str(e))
     return lesson
 
@@ -57,3 +112,26 @@ def delete_lesson(lesson_id: int, db = Depends(get_db)):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
     return deleted_lesson
+
+# @router.post("/upload")
+# async def upload_lesson(course_name: str, file: UploadFile = File(...)):
+#     """Endpoint pour téléverser un fichier de leçon"""
+#     MAX_FILE_MB = 20
+#     MAX_FILE_SIZE = MAX_FILE_MB * 1024 * 1024  # en octets
+#     try:
+#         file_bytes = await file.read()
+#         print(f"{course_name}/{file.filename}", file.content_type, len(file_bytes)/(1024*1024), "MB")
+#         # Vérifier la taille du fichier
+#         if len(file_bytes) > MAX_FILE_SIZE:
+#             raise HTTPException(
+#                 status_code=413,
+#                 detail=f"Le fichier est trop volumineux. La taille maximale autorisée est de {MAX_FILE_MB} Mo."
+#             )
+
+#         # Call the upload_file function from supabase_utils
+#         upload_response = "" #upload_file(file_bytes,file.filename, course_name, file.content_type)
+
+#     except Exception as e:
+#         raise HTTPException(status_code=400, detail=str(e))
+    
+#     return upload_response
