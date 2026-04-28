@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CoursesPage from "./app/pages/CoursesPage";
 import CourseDetailPage from "./app/pages/CourseDetailPage";
+import AdminPage from "./app/pages/AdminPage";
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<CoursesPage />} />
         <Route path="/courses/:id" element={<CourseDetailPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );
