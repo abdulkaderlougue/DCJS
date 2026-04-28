@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, status
+from typing import Optional
+from pydantic import AnyHttpUrl 
 from app.core.database import get_db
 from app.crud import lessons, courses
 from app.schemas.lesson import LessonType, LessonCreate, LessonResponse, LessonUpdate
@@ -33,14 +35,15 @@ def get_lesson_by_id(lesson_id: int, db = Depends(get_db)):
 
 @router.post("/", response_model=LessonResponse)
 async def create_lesson(
-    file: UploadFile,
+    file: Optional[UploadFile] = File(None),
     course_id: int = Form(...),
     chapitre: str = Form(""), # not required
     titre: str = Form(...),
     description: str = Form(""),
     duration: int = Form(description="La duree en seconde"),  # I should calculate in the backend
     lesson_type: LessonType = Form(), # audio or live
-    db = Depends(get_db)
+    db = Depends(get_db),
+    live_url: AnyHttpUrl = Form(None, description="Pour un cour en live, doit commencer avec https://")
     ):
     """Endpoint pour créer une nouvelle leçon
     duration: la duree de l'audio ou le live
@@ -49,34 +52,49 @@ async def create_lesson(
     MAX_FILE_MB = 50
     MAX_FILE_SIZE = MAX_FILE_MB * 1024 * 1024  # en octets
 
+    # Check for file if the lesson type is not live
+    if lesson_type.lower() != LessonType.live and file is None:
+        # 
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Un fichier est obligatoire pour les lecons du type {lesson_type}.")
+    
+    # needs http url for live events
+    if lesson_type == LessonType.live and live_url is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+        detail="Le lien est obligatoire pour les cours en live")
+    else:
+        url = live_url
 
     try:
-        # valider le type de fichier
-        if not file.content_type.startswith("audio/"):
-            raise HTTPException(
-                status_code=400,
-                detail="Type de fichier invalid. Selectionnez un fichier audio"
-            )
+        if lesson_type != LessonType.live:
+            # valider le type de fichier
+            if not file.content_type.startswith("audio/"):
+                raise HTTPException(
+                    status_code=400,
+                    detail="Type de fichier invalid. Selectionnez un fichier audio"
+                )
 
-        file_bytes = await file.read() # lire le fichier
+            file_bytes = await file.read() # lire le fichier
 
-        # valider la taille du fichier
-        if len(file_bytes) > MAX_FILE_SIZE:
-            raise HTTPException(
-                status_code=413,
-                detail=f"Le fichier est trop volumineux. La taille maximale autorisée est de {MAX_FILE_MB} Mo."
-            )
-        
-        
-        file_name = "_".join(file.filename.split(" "))
-        course = courses.get_course_by_id(db, course_id)
-        course_name = "_".join(course.titre.split(" "))
-        instructor = "_".join(course.animateur.split(" "))
-        file_storage_path = f"{course_name}/{instructor}/{file_name}"
-        print(file_storage_path)
-        # Téléverser le fichier de la leçon et obtenir l'URL publique
-        res = upload_file(file_bytes, file_storage_path, file.content_type)
-        print(f"Lesson file uploaded successfully")
+            # valider la taille du fichier
+            if len(file_bytes) > MAX_FILE_SIZE:
+                raise HTTPException(
+                    status_code=413,
+                    detail=f"Le fichier est trop volumineux. La taille maximale autorisée est de {MAX_FILE_MB} Mo."
+                )
+            
+            
+            file_name = "_".join(file.filename.split(" "))
+            course = courses.get_course_by_id(db, course_id)
+            course_name = "_".join(course.titre.split(" "))
+            instructor = "_".join(course.animateur.split(" "))
+            file_storage_path = f"{course_name}/{instructor}/{file_name}"
+            print(file_storage_path)
+            # Téléverser le fichier de la leçon et obtenir l'URL publique
+            res = upload_file(file_bytes, file_storage_path, file.content_type)
+            print(f"Lesson file uploaded successfully")
+            url = res['url']
+
         lesson_data = {
             "course_id": course_id,
             "chapitre": chapitre,
@@ -84,7 +102,7 @@ async def create_lesson(
             "description": description,
             "duration": duration,
             "lesson_type": lesson_type,
-            "audio_url": res['url']
+            "audio_url": url
         }
         # convert the dict object to pyddantic format to be parsed easily 
         pydantic_lesson_data = LessonCreate(**lesson_data)

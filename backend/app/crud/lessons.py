@@ -4,16 +4,19 @@ from app.models.course import Course
 from app.schemas.lesson import LessonCreate, LessonUpdate
 from sqlalchemy.orm import Session
 
-def create_lesson(db, lesson_data: LessonCreate):
+def create_lesson(db, lesson: LessonCreate):
     """ Créer une nouvelle leçon dans la base de données """
 
     # Get the course to which the lesson belongs
-    course = db.query(Course).filter(Course.id == lesson_data.course_id).first()
+    course = db.query(Course).filter(Course.id == lesson.course_id).first()
     if not course:
-        raise ValueError(f"Le cours avec l'ID {lesson_data.course_id} n'existe pas")
+        print(f"Le cours avec l'ID {lesson.course_id} n'existe pas")
+        raise ValueError(f"Le cours avec l'ID {lesson.course_id} n'existe pas")
     
     # Creer la leçon 
-    lesson = Lesson(**lesson_data.model_dump()) # unpack les données de la leçon à partir du Pydantic model
+    lesson_data = lesson.model_dump()
+    lesson_data['audio_url'] = str(lesson_data['audio_url'])
+    lesson = Lesson(**lesson_data) # unpack les données de la leçon à partir du Pydantic model
 
     # ajouter la leçon à la liste des leçons du cours, pour automatiquement creer l'ordre des lecons
     course.lessons.append(lesson) 

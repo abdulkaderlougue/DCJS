@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, AnyHttpUrl
 from typing import Optional
 from enum import Enum
 class LessonType(str, Enum):
@@ -11,7 +11,7 @@ class LessonBase(BaseModel):
     titre: str
     description: str | None = None
     duration: int
-    audio_url: str
+    audio_url: AnyHttpUrl # url should starts with full https:// or http://
     lesson_type: LessonType
     # order_index: int
 
