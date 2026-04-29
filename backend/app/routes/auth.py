@@ -1,8 +1,14 @@
 from fastapi import APIRouter
 from app.schemas.auth import BasicAuth, BasicAuthResp
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+AUTH_KEY = os.getenv("AUTH_KEY")
 router = APIRouter()
-ADMIN_PASSWORD = "dcjs2025" # Simple password gate
-AUTH_KEY = "dcjs_admin_auth"
+# ADMIN_PASSWORD = "" # Simple password gate
+# AUTH_KEY = ""
 
 #  just simple auth
 @router.post("/", response_model=BasicAuthResp)
