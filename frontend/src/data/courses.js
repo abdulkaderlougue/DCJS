@@ -39,9 +39,10 @@
 // }
 const SAMAKE = "imam_samake";
 const BAKAYOKO = "imam_bakayoko";
-const CLOUDFARE_PUBLIC_BASE_URL="https://pub-0a4b4bf38492431b91bd29776ddb5504.r2.dev";
-const PUBLIC_BASE_URL="https://nmdetbbectwrrsgargmo.supabase.co/storage/v1/object/public";
-const PUBLIC_BASE_URL2="https://bgkaionsqxegfbfxtoct.supabase.co/storage/v1/object/public";
+const CLOUDFARE_PUBLIC_BASE_URL="https://pub-3efb35bbbb7a4f36a8ffa934cc55b65e.r2.dev"; //dev, has limit delice gmail
+const CLOUDFARE_TAFSIR_DIR="tafsirs"
+const PUBLIC_BASE_URL="https://nmdetbbectwrrsgargmo.supabase.co/storage/v1/object/public"; // soccer exposur
+const PUBLIC_BASE_URL2="https://bgkaionsqxegfbfxtoct.supabase.co/storage/v1/object/public"; // delice url
 const FIQH_DIR = "delice-des-coeurs/fiqh/livres/Adourraroul_Bihiya";
 const AQEEDAH_DIR = "delice-des-coeurs/aquidah/livres/rissala_ibn_abi_zaid";
 const TAFSEER_DIR = "delice-des-coeurs/tafsirs";
@@ -252,18 +253,19 @@ export const courses = [
     color: "primary",
     lessons: [
       { id: "q0", title: "Google Meet", duration: "1:00:00", audioUrl: "", completed: false, type: "live" },
-      { id: "q1", title: "Al-Basmallah (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/01_TAFSEER_Basmallah_1.mp3`, completed: false, type: "audio" },
-      { id: "q2", title: "Al-Basmallah (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/01_TAFSEER_Basmallah_2.mp3`, completed: false, type: "audio" },
-      { id: "q3", title: "Surah An-Nass (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/02_TAFSEER_NASS.m4a`, completed: false, type: "audio" },
-      { id: "q4", title: "Surah Al-Falaq (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/04_TAFSEER_FALAQ_1.m4a`, completed: false, type: "audio" },
-      { id: "q5", title: "Surah Al-Falaq (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/04_TAFSEER_FALAQ_2.m4a`, completed: false, type: "audio" },
-      { id: "q6", title: "Surah Al-Ikhlas (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/05_TAFSEER_IKLASS_1.m4a`, completed: false, type: "audio" },
-      { id: "q7", title: "Surah Al-Ikhlas (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/05_TAFSEER_IKLASS_2.m4a`, completed: false, type: "audio" },
-      { id: "q8", title: "Surah Al-Masad (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/07_TAFSEER_MASSAD_1.mp3`, completed: false, type: "audio" },
-      { id: "q9", title: "Surah Al-Masad (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/07_TAFSEER_MASSAD_2.mp3`, completed: false, type: "audio" },
-      { id: "q10", title: "Surah An-Nasr (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/08_TAFSEER_AN-NASR_1.mp3`, completed: false, type: "audio" },
-      { id: "q11", title: "Surah An-Nasr (Partie 2)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/10_TAFSEER_AN-NASR_2.m4a`, completed: false, type: "audio" },
-      { id: "q12", title: "Surah Al-Kafiroon (Partie 1)", duration: "", audioUrl: `${PUBLIC_BASE_URL}/${TAFSEER_DIR}/${BAKAYOKO}/11_TAFSEER_AL-KAFIROON_1.m4a`, completed: false, type: "audio" }
+      { id: "q1", title: "Al-Basmallah (Partie 1)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/01_TAFSEER_Basmallah_1.mp3`, completed: false, type: "audio" },
+      { id: "q2", title: "Al-Basmallah (Partie 2)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/01_TAFSEER_Basmallah_2.mp3`, completed: false, type: "audio" },
+      { id: "q3", title: "Surah An-Nass (Partie 1)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/02_TAFSEER_NASS.m4a`, completed: false, type: "audio" },
+      { id: "q4", title: "Surah Al-Falaq (Partie 1)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/04_TAFSEER_FALAQ_1.m4a`, completed: false, type: "audio" },
+      { id: "q5", title: "Surah Al-Falaq (Partie 2)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/04_TAFSEER_FALAQ_2.m4a`, completed: false, type: "audio" },
+      { id: "q6", title: "Surah Al-Ikhlas (Partie 1)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/05_TAFSEER_IKLASS_1.m4a`, completed: false, type: "audio" },
+      { id: "q7", title: "Surah Al-Ikhlas (Partie 2)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/05_TAFSEER_IKLASS_2.m4a`, completed: false, type: "audio" },
+      { id: "q8", title: "Surah Al-Masad (Partie 1)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/07_TAFSEER_MASSAD_1.mp3`, completed: false, type: "audio" },
+      { id: "q9", title: "Surah Al-Masad (Partie 2)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/07_TAFSEER_MASSAD_2.mp3`, completed: false, type: "audio" },
+      { id: "q10", title: "Surah An-Nasr (Partie 1)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/08_TAFSEER_AN-NASR_1.mp3`, completed: false, type: "audio" },
+      { id: "q11", title: "Surah An-Nasr (Partie 2)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/10_TAFSEER_AN-NASR_2.m4a`, completed: false, type: "audio" },
+      { id: "q12", title: "Surah Al-Kafiroon (Partie 1)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/11_TAFSEER_AL-KAFIROON_1.m4a`, completed: false, type: "audio" },
+      { id: "q13", title: "Surah Al-Kafiroon (Partie 2)", duration: "", audioUrl: `${CLOUDFARE_PUBLIC_BASE_URL}/${CLOUDFARE_TAFSIR_DIR}/${BAKAYOKO}/12_TAFSEER_AL-KAFIROON_2.m4a`, completed: false, type: "audio" }
     ],
     quizzes: [
       // { id: "qq1", question: "What is Tajweed?", options: ["Speed reading", "Science of proper Quran recitation", "Arabic grammar", "Hadith study"], correctIndex: 1 },
