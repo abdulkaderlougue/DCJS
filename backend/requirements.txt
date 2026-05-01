@@ -2,3 +2,5 @@ fastapi[standard]
 supabase
 sqlalchemy
 boto3
+psycopg2
+alembic
