@@ -3,11 +3,17 @@ from typing import Optional
 from pydantic import AnyHttpUrl 
 from app.core.database import get_db
 from app.crud import lessons, courses
-from app.schemas.lesson import LessonType, LessonCreate, LessonResponse, LessonUpdate
+from app.schemas.lesson import LessonType, LessonCreate, LessonResponse, LessonUpdate, StorageProvider
 from app.utils.supabase_utils import upload_file
+from app.utils.cloudflare_utils import upload_file_cloudflare
+import os
+from dotenv import load_dotenv
 
 router = APIRouter()
 
+load_dotenv()
+
+STORAGE_PROVIDER=os.getenv("STORAGE_PROVIDER")
 
 @router.get("/", response_model=list[LessonResponse])
 def get_lessons(db = Depends(get_db)):
@@ -73,7 +79,7 @@ async def create_lesson(
                     status_code=400,
                     detail="Type de fichier invalid. Selectionnez un fichier audio"
                 )
-
+            
             file_bytes = await file.read() # lire le fichier
 
             # valider la taille du fichier
@@ -86,13 +92,18 @@ async def create_lesson(
             
             file_name = "_".join(file.filename.split(" "))
             course = courses.get_course_by_id(db, course_id)
-            course_name = "_".join(course.titre.split(" "))
-            instructor = "_".join(course.animateur.split(" "))
+            course_name = ("_".join(course.titre.split(" "))).lower()
+            instructor = ("_".join(course.animateur.split(" "))).lower()
             file_storage_path = f"{course_name}/{instructor}/{file_name}"
             print(file_storage_path)
-            # Téléverser le fichier de la leçon et obtenir l'URL publique
-            res = upload_file(file_bytes, file_storage_path, file.content_type)
+            # Téléverser le fichier de la leçon et obtenir l'URL publique 
+            if STORAGE_PROVIDER == StorageProvider.supabase:
+                # use supabase to store
+                res = upload_file(file_bytes, file_storage_path, file.content_type)
+            else:
+                res = upload_file_cloudflare(file.file, file_storage_path, file.content_type)
             print(f"Lesson file uploaded successfully")
+            
             url = res['url']
 
         lesson_data = {

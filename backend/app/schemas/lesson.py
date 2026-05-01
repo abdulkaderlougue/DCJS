@@ -1,6 +1,10 @@
 from pydantic import BaseModel, ConfigDict, AnyHttpUrl
 from typing import Optional
 from enum import Enum
+class StorageProvider(str, Enum):
+    supabase = "supabase"
+    cloudflare = "cloudflare"
+    
 class LessonType(str, Enum):
     audio = "audio"
     live  = "live"
