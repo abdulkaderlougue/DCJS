@@ -2,3 +2,4 @@
 env/
 __pycache__/
 populate_sample_data.py
+db_insert.py

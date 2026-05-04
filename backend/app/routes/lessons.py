@@ -94,6 +94,18 @@ async def create_lesson(
             course = courses.get_course_by_id(db, course_id)
             course_name = ("_".join(course.titre.split(" "))).lower()
             instructor = ("_".join(course.animateur.split(" "))).lower()
+
+            # reset the folder path to be compatible with folder structure in storage
+            # ---------------------------
+            if "bakayo" in instructor: 
+                instructor="imam_bakayoko"
+            elif "samake" in instructor:
+                instructor = "imam_samake"
+            # 
+            if "tafsir" in course_name:
+                course_name = "tafsirs"
+            # ---------------------------
+
             file_storage_path = f"{course_name}/{instructor}/{file_name}"
             print(file_storage_path)
             # Téléverser le fichier de la leçon et obtenir l'URL publique 
@@ -123,6 +135,13 @@ async def create_lesson(
         print(str(e))
         raise HTTPException(status_code=400, detail=str(e))
     return lesson
+
+# @router.post("/create")
+# def temp_create_lesson(data: LessonCreate, db = Depends(get_db)):
+#     lesson_pyd = LessonCreate(**data)
+#     lesson = lessons.create_lesson(db, lesson_pyd)
+#     return lesson
+    
 
 @router.put("/{lesson_id}", response_model=LessonResponse)
 def update_lesson(lesson_id: int, lesson_data: LessonUpdate, db = Depends(get_db)):

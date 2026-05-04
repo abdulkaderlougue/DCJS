@@ -46,12 +46,12 @@ return (
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-xl font-bold text-foreground">{course.title}</h1>
-          <p className="text-xs text-muted-foreground">Animateur: {course.instructor}</p>
-          {course.book && (<p className="text-xs text-muted-foreground">Livre: {course.book}</p>)}
-          {course.author && (<p className="text-xs text-muted-foreground">Auteur: {course.author}</p>)}
+          <h1 className="truncate text-xl font-bold text-foreground">{course.titre}</h1>
+          <p className="text-xs text-muted-foreground">Animateur: {course.animateur}</p>
+          {course.livre && (<p className="text-xs text-muted-foreground">Livre: {course.livre}</p>)}
+          {course.auteur && (<p className="text-xs text-muted-foreground">Auteur: {course.auteur}</p>)}
         </div>
-        <span className="text-2xl">{course.icon}</span>
+        <span className="text-2xl">{course.icon?"I":"No"}</span>
       </div>
 
       {/* Progress */}
@@ -109,7 +109,7 @@ return (
                   ? "border-primary bg-primary/5"
                   : "border-border bg-card hover:border-primary/30"
               }`}
-              aria-label={`${lesson.title} — ${lesson.completed ? "completed" : "not completed"}`}
+              aria-label={`${lesson.titre} — ${lesson.completed ? "completed" : "not completed"}`}
             >
 
               {/* circle icon section */}
@@ -130,7 +130,7 @@ return (
               {/* Detail/lesson+duration section */}
               <div className="min-w-0 flex-1">
                 <p className={`truncate text-sm font-medium ${lesson.completed ? "text-muted-foreground" : "text-card-foreground"}`}>
-                  {lesson.title}
+                  {lesson.titre}
                 </p>
                 <p className="text-xs text-muted-foreground flex items-center gap-1">
                   {lesson.type === "live" ? (

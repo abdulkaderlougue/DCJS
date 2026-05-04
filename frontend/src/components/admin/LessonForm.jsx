@@ -30,6 +30,7 @@ const LessonForm = () =>{
     description: "",
     hours: "0",
     minutes: "0",
+    seconds: "0",
     lesson_type: "audio",
     live_url: ""
   });
@@ -112,7 +113,7 @@ const LessonForm = () =>{
 
     const hour = parseInt(form.hours) || 0;
     const minutes = parseInt(form.minutes) || 0;
-    const totalSeconds = (hour*3600) + (minutes * 60);
+    const totalSeconds = (hour*3600) + (minutes * 60) + parseInt(form.seconds);
 
     if(totalSeconds <= 0){
       toast.info("Durée invalide", {
@@ -160,6 +161,7 @@ const LessonForm = () =>{
         description: "",
         hours: "0",
         minutes: "0",
+        seconds: "0",
         lesson_type: "",
         live_url: ""
       });
@@ -304,7 +306,7 @@ const LessonForm = () =>{
           {/* duree */}
           <div className="space-y-2">
             <Label>Durée *</Label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               <div className="flex items-center gap-2">
                 <Input
                   id="hours"
@@ -326,6 +328,17 @@ const LessonForm = () =>{
                   onChange={(e) => update("minutes", e.target.value)}
                 />
                 <span className="text-sm text-muted-foreground">minutes</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Input
+                  id="seconds"
+                  type="number"
+                  min={0}
+                  max={59}
+                  value={form.seconds}
+                  onChange={(e) => update("seconds", e.target.value)}
+                />
+                <span className="text-sm text-muted-foreground">secondes</span>
               </div>
             </div>
           </div>
