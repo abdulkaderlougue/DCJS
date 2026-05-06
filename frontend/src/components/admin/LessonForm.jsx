@@ -15,7 +15,7 @@ import {
 import { Upload, ExternalLink, X } from "lucide-react";
 import { toast } from "sonner";
 
-const API_BASE = "http://127.0.0.1:9000"  
+const API_BASE = import.meta.env.VITE_API_URL; 
 const MAX_AUDIO_SIZE_MB = 50; // in MB
 const MAX_AUDIO_SIZE = MAX_AUDIO_SIZE_MB * 1024 * 1024; // in bytes
 const LessonForm = () =>{

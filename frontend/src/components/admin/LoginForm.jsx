@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Lock } from "lucide-react";
 import { toast } from "sonner"
 
-const API_BASE = "http://localhost:9000";
+const API_BASE = import.meta.env.VITE_API_URL;
 const AUTH_KEY = "dcjs_admin_auth";
 
 export default function LoginForm({onLogin}){

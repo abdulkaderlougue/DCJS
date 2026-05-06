@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Button } from '@/components/ui/button';
 import { Play, Pause, SkipBack, SkipForward, Volume2, Download } from "lucide-react";
+import { formatTime } from "../utils/helpers";
 
 function AudioPlayer( { lesson }) {
     // need ref to have access to the actual DOM to use audio properties as React does not provide
@@ -11,7 +12,7 @@ function AudioPlayer( { lesson }) {
     const [audioSpeed, setAudioSpeed] = useState(1);
     const speeds = [1, 1.25, 1.5, 1.75, 2];
 
-    // console.log(lesson.audioUrl)
+    // console.log(lesson.audio_url)
     // toggle to play and pause
     const togglePlay = () =>{
         // no action if no audio ref
@@ -32,17 +33,7 @@ function AudioPlayer( { lesson }) {
         if (currTime)  setCurrentTime(currTime);
     }
 
-    // format time
-    const formatTime = (time) => {
-        // time: in seconds
-        let hours = Math.trunc(time/3600); // equivalent of // in PYTHON
-        let minutes = Math.trunc((time%3600) / 60); // rest divided by 60 for the minutes
-        let seconds = Math.floor((time%3600) % 60); 
-        // if minutes or seconds are less than 0, add an extra 0
-        let formatedTime = `${hours}:${minutes < 10 ? "0":""}${minutes}:${seconds < 10 ? "0":""}${seconds}`;
-        return formatedTime
-        
-    }
+   
 
     const handleLoadedMetadata = () =>{
         // set the duration in seconds, provide as input to input slider
@@ -92,7 +83,7 @@ function AudioPlayer( { lesson }) {
             {/* audio with custom controls */}
             <audio
                 ref={audioRef}
-                src={lesson.audioUrl}
+                src={lesson.audio_url}
                 onTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={handleLoadedMetadata}
                 onEnded={handleEnded} 
@@ -111,7 +102,7 @@ function AudioPlayer( { lesson }) {
             />
             <div className="mb-3 flex justify-between text-xs text-muted-foreground">
                 <span>{formatTime(currentTime)}</span>
-                <span>{duration ? formatTime(duration) : lesson.duration}</span> 
+                <span>{duration ? formatTime(duration) : formatTime(lesson.duration)}</span> 
             </div>
 
             <div className="flex items-center justify-center gap-4">
@@ -138,7 +129,7 @@ function AudioPlayer( { lesson }) {
                 </select>
 
                 {/* Download the audio */}
-                <a href={lesson.audioUrl} download>
+                <a href={lesson.audio_url} download>
                     <Download className="h-4 w-4 text-muted-foreground"/>
                 </a>
                 

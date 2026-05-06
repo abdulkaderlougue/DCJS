@@ -21,7 +21,7 @@ const AdminPage = () =>{
       const auth = sessionStorage.getItem(AUTH_KEY)
       if (auth === '1') {
         setAuthorized(true);
-        console.log(auth);
+        // console.log(auth);
       }
     }, [])
     
@@ -31,7 +31,7 @@ const AdminPage = () =>{
       setAuthorized(false);
 
     }
-    console.log(sessionStorage.getItem(AUTH_KEY))
+    // console.log(sessionStorage.getItem(AUTH_KEY))
     if (!authorized){
       return <LoginForm onLogin={handleLogin}/>
     }

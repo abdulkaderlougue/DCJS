@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { courses } from "../../data/courses";
 import AudioPlayer from "../../components/AudioPlayer";
 import QuizCard from "../../components/QuizCard";
@@ -7,23 +7,37 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CheckCircle, Circle, Radio, Headphones } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { formatTime } from "../../utils/helpers";
+import MyError from "../../components/MyError";
+import Loading from "../../components/Loading";
+import CategoryIcon from "../../components/CategoryIcon";
+
+const API_BASE = import.meta.env.VITE_API_URL;
 
 export default function CourseDetailPage() {
-  const { id } = useParams(); // get the id from the url
+  const { course_id } = useParams(); // get the id from the url
   const navigate = useNavigate();
   const PATH_BACK = '/'; // path to go back
-  const course = courses.find((course) => course.id === id);
+  // const course = courses.find((course) => course.id === course_id);
+  const [error, setError] = useState(null)
+  const [course, setCourse] = useState({
+
+  }) 
+  const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState('lessons'); // lessons or quizzes
-  const [activeLesson, setActiveLesson] = useState(null);
-  const currentLesson = course.lessons.find((lesson) => lesson.id === activeLesson);
-  // console.log(currentLesson)
+  const [activeLessonId, setActiveLessonId] = useState(0);
+  const currentLesson = activeLessonId? course.lessons?.find((lesson) => lesson.id === activeLessonId):null;
+  // const Icon = course? getIcon(course.categorie)[0]:getIcon("Default")[0]
+  // const color = course? getIcon(course.categorie)[1]:getIcon("Default")[1]
 
   // compute progress
   const progress = Math.round((course.completedLessons / course.totalLessons) * 100);
 
   const handleLessonClick = (lesson) => {
     // set active lesson
-    if (lesson.type === "audio") setActiveLesson(lesson.id);
+    if (lesson.lesson_type === "audio") {
+      setActiveLessonId(lesson.id);
+    };
     // console.log(lesson.audioUrl)
 
     // scroll up
@@ -37,8 +51,40 @@ export default function CourseDetailPage() {
     navigate(PATH_BACK);
   }
 
+  useEffect(()=>{
+    const getCourse = async ()=>{
+      const url = `${API_BASE}/courses/${parseInt(course_id)}`;
+      try{
+        const res  = await fetch(url)
+        if(!res.ok) throw new Error("Failed to load lessons")
 
-return (
+        const data = await res.json()
+        // console.log(data)
+        // const lessonList = Array.isArray(data)? data: []
+        setCourse(data)
+      }catch (err){
+        console.error(err);
+
+         // distinguish network error vs server error
+        if (err.name === "TypeError") {
+          setError("Impossible de joindre le serveur.");
+        } else {
+          setError("Erreur lors du chargement.");
+        }
+      }finally{
+        setLoading(false);
+      }
+      
+    }
+
+    getCourse()
+  }, [])
+
+if (loading) return <Loading message="Chargement du cours..." />
+
+if (error) return <MyError message={error}/>
+
+return course &&(
     <div className="animate-fade-in space-y-4 pb-4">
       {/* Header */}
       <div className="flex items-center gap-3">
@@ -51,23 +97,24 @@ return (
           {course.livre && (<p className="text-xs text-muted-foreground">Livre: {course.livre}</p>)}
           {course.auteur && (<p className="text-xs text-muted-foreground">Auteur: {course.auteur}</p>)}
         </div>
-        <span className="text-2xl">{course.icon?"I":"No"}</span>
+        {/* <span className="text-2xl">{<Icon color={color} />}</span> */}
+        <span className="text-2xl">{<CategoryIcon category={course.categorie}/>}</span>
       </div>
 
       {/* Progress */}
       <div className="rounded-lg border border-border bg-card p-3">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-card-foreground">{course.completedLessons}/{course.totalLessons} leçon{course.totalLessons >1 ? "s":""}</span>
-          <span className="font-bold text-primary">{progress}%</span>
+          <span className="text-card-foreground">{course.completedLessons}{course.lessons.length} leçon{course.lessons.length >1 ? "s":""}</span>
+          {/* <span className="font-bold text-primary">{progress}%</span> */}
         </div>
-        <Progress value={progress} className="mt-2 h-1.5" />
+        {/* <Progress value={progress} className="mt-2 h-1.5" /> */}
       </div>
 
       {/* Audio Player */}
-      {currentLesson && currentLesson.type === "audio" && (
+      {currentLesson && currentLesson.lesson_type === "audio" && (
         <AudioPlayer
           lesson={currentLesson}
-          // onComplete={() => setActiveLesson(null)}
+          // onComplete={() => setActiveLessonId(null)}
           // onComplete={() => currentLesson.completed=true}
         />
       )}
@@ -84,7 +131,7 @@ return (
         </button>
 
         {/* Quiz section if there is any quiz */}
-        {course.quizzes.length > 0 && (
+        {/* {course.quizzes.length > 0 && (
           <button
             onClick={() => setTab("quizzes")}
             className={`px-4 py-2 text-sm font-medium transition-colors ${
@@ -93,19 +140,19 @@ return (
           >
             Quizzes ({course.quizzes.length})
           </button>
-        )}
+        )} */}
       </div>
 
       {/* Lessons List */}
       {tab === "lessons" && (
         <div className="space-y-2">
-          {course.lessons.map((lesson, idx) => (
+          {course && course.lessons.map((lesson, idx) => (
             <button
               key={lesson.id}
-              // onClick={() => lesson.type === "audio" && setActiveLesson(lesson.id)}
+              // onClick={() => lesson.lesson_type === "audio" && setActiveLessonId(lesson.id)}
               onClick={() => handleLessonClick(lesson)}
               className={`flex w-full items-center gap-3 rounded-lg border p-3 text-left transition-all ${
-                activeLesson === lesson.id
+                activeLessonId === lesson.id
                   ? "border-primary bg-primary/5"
                   : "border-border bg-card hover:border-primary/30"
               }`}
@@ -117,7 +164,7 @@ return (
                 {/* check for completed lesson for checkmark */}
                 {lesson.completed ? (
                   <CheckCircle className="h-4 w-4 text-primary" />
-                ) : lesson.type === "live" ? (
+                ) : lesson.lesson_type === "live" ? (
                   <Radio className="h-4 w-4 text-destructive" />
                 ) : (
                   <>
@@ -133,13 +180,13 @@ return (
                   {lesson.titre}
                 </p>
                 <p className="text-xs text-muted-foreground flex items-center gap-1">
-                  {lesson.type === "live" ? (
+                  {lesson.lesson_type === "live" ? (
                     <><Radio className="h-3 w-3 text-destructive" /> Live Lecture</>
                   ) : (
-                    <><Headphones className="h-3 w-3" /> {lesson.duration}</>
+                    <><Headphones className="h-3 w-3" /> {formatTime(lesson.duration)}</>
                   )}
                 </p>
-                {lesson.chapter && <p className="text-xs text-muted-foreground flex items-center gap-1">Chapitre: {lesson.chapter }</p>}
+                {lesson.chapitre && <p className="text-xs text-muted-foreground flex items-center gap-1">Chapitre: {lesson.chapitre }</p>}
               </div>
             </button>
           ))}

@@ -241,7 +241,7 @@ export const courses = [
     ],
   },
   {
-    id: "quran2",
+    id: "3",
     title: "Tafsir",
     titleAr: "تفسير القرآن",
     description: "Ce cours, animé par l’Imam A. Bakayoko, propose une introduction accessible au tafsir (exégèse du Coran). Il permet de mieux comprendre les significations des versets et leurs enseignements à la lumière des sources traditionnelles.",

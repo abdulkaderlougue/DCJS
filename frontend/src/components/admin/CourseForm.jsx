@@ -18,12 +18,12 @@ const CATEGORIES = [
   "Hadith",
   "Quran",
   "Fiqh",
-  "Islamic Studies",
   "Arabic",
   "Aqeedah",
+  "Sermon",
 ];
 
-const API_BASE = "http://127.0.0.1:9000"
+const API_BASE = import.meta.env.VITE_API_URL;
 
 export default function CourseForm(){
     const [loading, setLoading] = useState(false);
