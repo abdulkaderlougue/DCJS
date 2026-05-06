@@ -156,7 +156,7 @@ const LessonForm = () =>{
         // 3. Upload file directly to Cloudflare R2
         const uploadedFileUrl = await uploadFileToCloudflare(audioFile, presignedUrl);
 
-        // console.log("Uploaded file URL:", uploadedFileUrl);
+        console.log("Uploaded file URL:", uploadedFileUrl);
         // const uploadedFileUrl = "https://0fc55ad95d.r2.cloudflarestorage.com/path)to_stor/3/test_Sourate_77-Al_Mursalat.m4a"
 
         payload.audio_url = uploadedFileUrl;
