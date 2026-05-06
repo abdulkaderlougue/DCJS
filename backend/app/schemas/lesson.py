@@ -4,6 +4,10 @@ from enum import Enum
 class StorageProvider(str, Enum):
     supabase = "supabase"
     cloudflare = "cloudflare"
+
+class UploadUrlPayload(BaseModel):
+    file_path: str
+    file_type: str
     
 class LessonType(str, Enum):
     audio = "audio"

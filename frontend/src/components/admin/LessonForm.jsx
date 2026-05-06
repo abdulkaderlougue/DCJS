@@ -14,6 +14,7 @@ import {
 
 import { Upload, ExternalLink, X } from "lucide-react";
 import { toast } from "sonner";
+import { getPresignedUrl, uploadFileToCloudflare } from "../../utils/helpers";
 
 const API_BASE = import.meta.env.VITE_API_URL; 
 const MAX_AUDIO_SIZE_MB = 50; // in MB
@@ -70,7 +71,7 @@ const LessonForm = () =>{
 
     // call the function
     loadCourses()
-      
+
   }, [])
   
   const handleSubmit = async (e) => {
@@ -124,31 +125,56 @@ const LessonForm = () =>{
     }
 
     setLoading(true);
+
     // building the form and request to backend
     try{
-      const form_data = new FormData();
-
-      form_data.append("course_id", form.course_id);
-      form_data.append("chapitre", form.chapitre);
-      form_data.append("titre", form.titre);
-      form_data.append("description", form.description);
-      form_data.append("duration", totalSeconds); // in second 
-      form_data.append("lesson_type", form.lesson_type);
       
-      if (form.lesson_type === "audio" && audioFile){
-        form_data.append("file", audioFile, audioFile.name)
+      const payload = {
+        course_id: form.course_id,
+        chapitre: form.chapitre,
+        titre: form.titre,
+        description: form.description,
+        duration: totalSeconds, // in second 
+        lesson_type: form.lesson_type,
       }
 
       if (form.lesson_type === "live"){
-        form_data.append("live_url", form.live_url);
+        payload.live_url = form.live_url;
       } 
       
-      // send request to the server
+      if (form.lesson_type === "audio" && audioFile){
+
+        // send request to the server
+        // 1. Build safe storage path
+        const safeFileName = audioFile.name.replace(/\s/g, "_");
+        const storagePath = `${form.course_id}/${safeFileName}`;
+
+        // 2. Get presigned upload URL from backend
+        const presignedUrl = await getPresignedUrl(storagePath, audioFile.type);
+        // console.log("Presigned URL:", presignedUrl);
+
+        // 3. Upload file directly to Cloudflare R2
+        const uploadedFileUrl = await uploadFileToCloudflare(audioFile, presignedUrl);
+
+        // console.log("Uploaded file URL:", uploadedFileUrl);
+        // const uploadedFileUrl = "https://0fc55ad95d.r2.cloudflarestorage.com/path)to_stor/3/test_Sourate_77-Al_Mursalat.m4a"
+
+        payload.audio_url = uploadedFileUrl;
+      }
+      
+      // console.log("Form data to submit:", payload)
+      // 4. (Optional) Save lesson metadata to backend
       const res = await fetch(`${API_BASE}/lessons`, {
         method: "POST",
-        body: form_data
-      })
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...payload
+        }),
+      });
 
+      // console.log("Response from backend:", res);
       if (!res.ok) throw new Error(`Erreur ${res.status}`);
       
       // success

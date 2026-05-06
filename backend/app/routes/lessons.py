@@ -3,9 +3,9 @@ from typing import Optional
 from pydantic import AnyHttpUrl 
 from app.core.database import get_db
 from app.crud import lessons, courses
-from app.schemas.lesson import LessonType, LessonCreate, LessonResponse, LessonUpdate, StorageProvider
+from app.schemas.lesson import LessonType, LessonCreate, LessonResponse, LessonUpdate, StorageProvider,UploadUrlPayload
 from app.utils.supabase_utils import upload_file
-from app.utils.cloudflare_utils import upload_file_cloudflare
+from app.utils.cloudflare_utils import upload_file_cloudflare, generate_secure_url
 import os
 from dotenv import load_dotenv
 
@@ -39,8 +39,24 @@ def get_lesson_by_id(lesson_id: int, db = Depends(get_db)):
     
     return lesson
 
+@router.post("/upload-url", include_in_schema=False)
+async def get_upload_url(payload: UploadUrlPayload):
+    try:
+        return generate_secure_url(payload.file_path, payload.file_type, method='put')
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 @router.post("/", response_model=LessonResponse)
-async def create_lesson(
+async def create_lesson(lesson_payload: LessonCreate, db = Depends(get_db)):
+    """Endpoint pour créer une nouvelle leçon"""
+    try:
+        lesson = lessons.create_lesson(db, lesson_payload)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    return lesson
+
+@router.post("/file", response_model=LessonResponse)
+async def create_lesson_with_file(
     file: Optional[UploadFile] = File(None),
     course_id: int = Form(...),
     chapitre: str = Form(""), # not required
