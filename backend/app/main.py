@@ -8,12 +8,18 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 origins = [
-    "http://localhost:5173"
+    "http://localhost:5173",
+    "https://delice-cjs.vercel.app",
+    "https://dcjs-frontend2.vercel.app",
+    "https://dcjs-frontend.vercel.app",
+    "https://delice-frontend.vercel.app",
+    
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_origin_regex=r"https?://.*(delice|dcjs).vercel.app",
     allow_credentials=False,
     allow_methods=['*'],
     allow_headers=['*']
