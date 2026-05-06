@@ -17,7 +17,7 @@ const getFileUrl = (signedUrl) =>{
   // Example signed URL: https://0fc95d.r2.cloudflarestorage.com/to_file/3/test_Sourate_77-Al_Mursalat_%28Les_envoy%C3%A9s%29_-_2%C3%A8me_partie.m4a?5.........a7f061ad76b5befe8483295a892af6e53d05d8c
   // then extract the file path: to_file/3/test_Sourate_77-Al_Mursalat_%28Les_envoy%C3%A9s%29_-_2%C3%A8me_partie.m4a
   const url = new URL(signedUrl); // Create a URL object to easily manipulate the URL
-  const path_to_store = url.pathname.substring(1); // Remove the leading '/' from the pathname
+  const path_to_store = url.pathname.replace(`/${import.meta.env.VITE_CLOUDFLARE_UPLOAD_BUCKET_NAME}/`,""); // Remove the leading '/bucket/' from the pathname
   
   return `${import.meta.env.VITE_CLOUDFLARE_UPLOAD_URL}/${path_to_store}`;
 }
