@@ -10,6 +10,7 @@ app = FastAPI()
 origins = [
     "http://localhost:5173",
     "https://delice-cjs.vercel.app",
+    "https://delice-cjs2.vercel.app",
     "https://dcjs-frontend2.vercel.app",
     "https://dcjs-frontend.vercel.app",
     "https://delice-frontend.vercel.app",
